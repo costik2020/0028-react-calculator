@@ -6,6 +6,7 @@ class Calculator extends React.Component{
         super(props);
         this.state = {
             display: "0",
+            wasEqualPressedBefore: false
 
         }; 
 
@@ -22,10 +23,13 @@ handleClearPress(e){
     console.log("clear was pressed!");
     this.setState((state)=>{
         return {
-            display: "0"
+            display: "0",
+            wasEqualPressedBefore: false
         }
     })
 }
+
+
 
 
 handleNumberPress(e){
@@ -39,6 +43,10 @@ handleNumberPress(e){
         return undefined;
     }
 
+    // If equal was pressed and a calcualtion was done just before the number press 
+    // Go ahead and clear evertything. 
+
+
     if (this.state.display === "0"){
 
         this.setState((state)=>{
@@ -46,14 +54,25 @@ handleNumberPress(e){
                 display: number
             }
         });
-    } else {
+    } else if ( "/*-+".indexOf(this.state.display[this.state.display.length-1]) !== -1  ) {
         this.setState ((state)=>{ 
             return {
-                display: this.state.display + " " + number,
+                display: this.state.wasEqualPressedBefore ? number : this.state.display + " " + number,
+                wasEqualPressedBefore: false 
+            } 
+        }  );
+    } else {
+
+        this.setState ((state)=>{ 
+            return {
+                display: this.state.wasEqualPressedBefore ? number : this.state.display + number,
+                wasEqualPressedBefore: false 
             } 
         }  );
     }
 }
+
+
 
 handleOperatorPress(e){
     let operator = e.target.textContent;
@@ -64,6 +83,7 @@ handleOperatorPress(e){
     // When I have `1*-2=` I want it to become  ` 1 * -2 = ` 
     // When I have `1 /*+-2` I want it to becom ` 1 + -2 = `
     // When I have `1 /+-*2` I want it to becom ` 1 * 2 = ` 
+ console.log("this.state.display=", this.state.display);
 
     let tempDisplayArray = this.state.display.trim().split(" ");
     let firstOperatorBeforeNow = tempDisplayArray[tempDisplayArray.length-1];
@@ -72,11 +92,11 @@ handleOperatorPress(e){
 
     // Test for the `1--2=` case, If I have 2 minuses, then it is a valid case but 3 minuses is not valid case
 
-//    console.log("this.state.display=", this.state.display);
-//    console.log("tempDisplayArray=", tempDisplayArray);
-//    console.log("firstOperatorBeforeNow=", firstOperatorBeforeNow);
-//    console.log("secondOperatorBeforeNow=", secondOperatorBeforeNow);
-//    console.log("operator=", operator);
+    console.log("this.state.display=", this.state.display);
+    console.log("tempDisplayArray=", tempDisplayArray);
+    console.log("firstOperatorBeforeNow=", firstOperatorBeforeNow);
+    console.log("secondOperatorBeforeNow=", secondOperatorBeforeNow);
+    console.log("operator=", operator);
 
     // 1 + 1 situation 
     if ("/*-+".indexOf(firstOperatorBeforeNow) === -1){
@@ -129,29 +149,16 @@ handleOperatorPress(e){
 
 
 
-    //    if ( ((operator === "-") && (firstOperatorBeforeNow ==="-") && ("/*-+".indexOf(secondOperatorBeforeNow) === -1) )
-    //        ||  ((operator === "-") && ( "/*-+".indexOf(firstOperatorBeforeNow) !== -1))  )
-    //    {
-    //
-    //        this.setState((state)=>{
-    //            return {
-    //                display: this.state.display + " " + operator + " "
-    //            }
-    //        });
-    //    } else  {
-    //        tempDisplayArray[tempDisplayArray.length-1] = operator;
-    //        let newDisplay = tempDisplayArray.join();
-    //        //console.log("newDisplay=", newDisplay);
-    //        this.setState((state)=>{
-    //            return {
-    //                display: newDisplay
-    //            }
-    //        });
-    //
-    //    }
-
+    if (this.state.wasEqualPressedBefore) {
+        this.setState((state)=>{
+            return {
+                wasEqualPressedBefore: false
+            }
+        });
+    }
 
 }
+
 
 
 
@@ -160,13 +167,17 @@ handleEqualPress(e){
     
     console.log("Equal was pressed for:");
     console.log("display=", this.state.display);
+    console.log("result=", `${result}`);
     console.log("----------------------");
     this.setState((state)=>{
         return {
-            display: result
+            display: `${result}`,
+            wasEqualPressedBefore: true
         }
     });
 }
+
+
 
 handleDecimalPress(e){
     let display = this.state.display;
