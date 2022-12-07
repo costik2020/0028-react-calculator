@@ -9,7 +9,7 @@ body {
 }
 
 .app {
-  background-color: yellow;
+  background-color: lightgreen;
   height: 100vh;
   display: flex;
   justify-content: center;
