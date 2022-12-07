@@ -5,8 +5,7 @@ class Calculator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            upperScreenValue: "0",
-            lowerScreenValue: "0"
+            display: "0",
 
         }; 
 
@@ -20,10 +19,10 @@ class Calculator extends React.Component{
 
 
 handleClearPress(e){
+    console.log("clear was pressed!");
     this.setState((state)=>{
         return {
-            upperScreenValue: "0",
-            lowerScreenValue: "0"
+            display: "0"
         }
     })
 }
@@ -32,56 +31,156 @@ handleClearPress(e){
 handleNumberPress(e){
 
     let number = e.target.textContent;
-    if (this.state.upperScreenValue === "0"){
+    // When inputting numbers, my calculator should not allow a number to begin with multiple zeros. 
+    // Deal with multiple zeroes "0" or "000" scenaries
+    // Don't allow the user to insert more than one zero 
+    if ((this.state.display === "0") && (e.target.textContent === "0")){
+        // Do nothing just exit the function 
+        return undefined;
+    }
+
+    if (this.state.display === "0"){
 
         this.setState((state)=>{
             return {
-                upperScreenValue: number,
-                lowerScreenValue: number
+                display: number
             }
         });
     } else {
         this.setState ((state)=>{ 
             return {
-                upperScreenValue: state.upperScreenValue.concat(number),
-                lowerScreenValue: state.lowerScreenValue.concat(number)
+                display: this.state.display + " " + number,
             } 
         }  );
     }
 }
 
 handleOperatorPress(e){
-let operator = e.target.textContent;
+    let operator = e.target.textContent;
 
-this.setState((state)=>{
-    return {
-        upperScreenValue: this.state.upperScreenValue + " " + operator + " ",
-        lowerScreenValue: operator
+    // Handle the special case when the user pressed double minuses
+
+    // When I have `1--2=` I want it to become  ` 1 - -2 = ` 
+    // When I have `1*-2=` I want it to become  ` 1 * -2 = ` 
+    // When I have `1 /*+-2` I want it to becom ` 1 + -2 = `
+    // When I have `1 /+-*2` I want it to becom ` 1 * 2 = ` 
+
+    let tempDisplayArray = this.state.display.trim().split(" ");
+    let firstOperatorBeforeNow = tempDisplayArray[tempDisplayArray.length-1];
+    let secondOperatorBeforeNow  = tempDisplayArray[tempDisplayArray.length-2];
+
+
+    // Test for the `1--2=` case, If I have 2 minuses, then it is a valid case but 3 minuses is not valid case
+
+//    console.log("this.state.display=", this.state.display);
+//    console.log("tempDisplayArray=", tempDisplayArray);
+//    console.log("firstOperatorBeforeNow=", firstOperatorBeforeNow);
+//    console.log("secondOperatorBeforeNow=", secondOperatorBeforeNow);
+//    console.log("operator=", operator);
+
+    // 1 + 1 situation 
+    if ("/*-+".indexOf(firstOperatorBeforeNow) === -1){
+        this.setState((state)=>{
+            return {
+                display: this.state.display + " " + operator + " "
+            }
+        });
+
+    } else if ((operator === "-") && (firstOperatorBeforeNow === "-") && ("/*-+".indexOf(secondOperatorBeforeNow) === -1) ) {
+        // 1 - - 1 situation
+
+        this.setState((state)=>{
+            return {
+                display: this.state.display + " " + operator + " "
+            }
+        });
+    } else if ( (operator === "-") && ( "/*+".indexOf(firstOperatorBeforeNow) !== -1 )  ){
+        // 1 + - 1 situation
+        this.setState((state)=>{
+            return {
+                display: this.state.display + " " + operator + " "
+            }
+        });
+
+    } else if ( ("/*-+".indexOf(firstOperatorBeforeNow) !== -1) && ("/*-+".indexOf(secondOperatorBeforeNow) !== -1) ){
+        // 1 * - + 1 situation 
+        tempDisplayArray.splice(tempDisplayArray.length-2, 2);
+        tempDisplayArray[tempDisplayArray.length - 1] = operator;
+        let newDisplay = tempDisplayArray.join(" ");
+        this.setState((state)=>{
+            return {
+                display: newDisplay
+            }
+        });
+
+
+    } else {
+        // 1 / * + 1 situation
+        tempDisplayArray[tempDisplayArray.length - 1] = operator;
+        let newDisplay = tempDisplayArray.join(" ");
+        this.setState((state)=>{
+            return {
+                display: newDisplay
+            }
+        });
+
+
     }
-});
+
+
+
+    //    if ( ((operator === "-") && (firstOperatorBeforeNow ==="-") && ("/*-+".indexOf(secondOperatorBeforeNow) === -1) )
+    //        ||  ((operator === "-") && ( "/*-+".indexOf(firstOperatorBeforeNow) !== -1))  )
+    //    {
+    //
+    //        this.setState((state)=>{
+    //            return {
+    //                display: this.state.display + " " + operator + " "
+    //            }
+    //        });
+    //    } else  {
+    //        tempDisplayArray[tempDisplayArray.length-1] = operator;
+    //        let newDisplay = tempDisplayArray.join();
+    //        //console.log("newDisplay=", newDisplay);
+    //        this.setState((state)=>{
+    //            return {
+    //                display: newDisplay
+    //            }
+    //        });
+    //
+    //    }
+
 
 }
 
 
 
 handleEqualPress(e){
-    let result = eval(this.state.upperScreenValue);
-
+    let result = eval(this.state.display);
+    
+    console.log("Equal was pressed for:");
+    console.log("display=", this.state.display);
+    console.log("----------------------");
     this.setState((state)=>{
         return {
-            upperScreenValue: result
+            display: result
         }
     });
 }
 
 handleDecimalPress(e){
-    let lowerScreenValue = this.state.lowerScreenValue;
+    let display = this.state.display;
 
-    if (!lowerScreenValue.includes(".")){
+    //When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted. 
+    let tempDisplayArray = this.state.display.split(" ");
+    let lastNumber = tempDisplayArray[tempDisplayArray.length-1];
+
+
+
+    if (!lastNumber.includes(".")){
         this.setState((state)=>{
             return {
-                upperScreenValue: this.state.upperScreenValue + ".",
-                lowerScreenValue: this.state.lowerScreenValue + "."
+                display: this.state.display + ".",
             }
         })
     }  
@@ -97,8 +196,7 @@ handleDecimalPress(e){
         return (
             <div className="calculator">
             <div id="bothDisplays">
-            <div id="upperDisplay">{this.state.upperScreenValue}</div>
-            <div id="display">{this.state.lowerScreenValue}</div>
+            <div id="display">{this.state.display}</div>
             </div>
 
             <div id="clear" onClick={this.handleClearPress} >AC</div>
