@@ -117,17 +117,30 @@ body {
   background: #F5F749;
   border-color: #F5F749;
   box-shadow: 0 0 7px #F5F749, 0 0 10px #F5F749, 0 0 21px #F5F749, 0 0 42px #F5F749, 0 0 82px #F5F749, 0 0 92px #F5F749, 0 0 102px #F5F749, 0 0 151px #F5F749;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */ 
+  /* transform: rotate(.03turn);  */
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 #bothDisplays ~ div:active {
   background: white;
 }
 
-#bothDisplays ~ div:active {
-  /*Responsivness*/
-  /*Laptop screen*/
-}
-
+/*Responsivness*/
+/*Laptop screen*/
 @media all and (max-width: 1200px) {
   .calculator {
     margin-top: 2rem;

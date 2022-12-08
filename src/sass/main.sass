@@ -158,6 +158,26 @@ body
   border-color:$neon-color
   box-shadow: 0 0 7px $neon-color,   0 0 10px $neon-color, 0 0 21px $neon-color, 0 0 42px $neon-color, 0 0 82px $neon-color, 0 0 92px $neon-color, 0 0 102px $neon-color, 0 0 151px $neon-color
 
+  animation-name: spin
+  animation-duration: 5000ms
+  animation-iteration-count: infinite
+  animation-timing-function: linear 
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */ 
+  /* transform: rotate(.03turn);  */
+
+
+
+
+
+@keyframes spin 
+    from 
+        transform: rotate(0deg)
+    to 
+        transform: rotate(360deg)
+    
+
 
 
 
@@ -168,7 +188,8 @@ body
   background: $active-buttons
 
 
-#bothDisplays ~ div:active
+
+
       
     
 
@@ -179,8 +200,8 @@ body
 
 
 
- /*Responsivness*/
- /*Laptop screen*/
+/*Responsivness*/
+/*Laptop screen*/
 @media all and (max-width: 1200px) 
   .calculator
     margin-top: 2rem
