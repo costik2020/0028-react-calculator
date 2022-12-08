@@ -1,14 +1,28 @@
 * {
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "bpdotsregular";
+  src: url("../fonts/BPdots-fontfacekit/web fonts/bpdots_regular_macroman/BPdots-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "codystarregular";
+  src: url("../fonts/codystar-fontfacekit/web fonts/codystar_regular_macroman/codystar-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
+  margin: 0;
   height: 90%;
   background-color: gray;
-  border: 4px solid blue;
 }
 
 .app {
+  border: 2px solid green;
   background-color: lightgreen;
   height: 100vh;
   display: flex;
@@ -22,12 +36,24 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(50px, auto);
+  border: 2px solid yellow;
+  margin: 8rem;
 }
 
 #bothDisplays {
   grid-column: 1/5;
   grid-row: 1/2;
-  background-color: #89909F;
+  background-color: black;
+  color: white;
+}
+
+#bothDisplays #display {
+  border: 2px solid blue;
+  text-align: right;
+  padding: 5px;
+  height: 5rem;
+  font-family: codystarregular, bpdotsregular, regular;
+  font-size: 2rem;
 }
 
 #clear {
@@ -70,6 +96,24 @@ body {
 #zero {
   grid-column: 1/3;
   grid-row: 6/7;
+}
+
+/*More style for the keys*/
+#bothDisplays ~ div {
+  text-align: center;
+  padding: 1.7rem 0;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+/*Click effects*/
+#bothDisplays ~ div:hover {
+  background: yellow;
+}
+
+#bothDisplays ~ div:active {
+  background: white;
 }
 
 /*# sourceMappingURL=main.css.map */

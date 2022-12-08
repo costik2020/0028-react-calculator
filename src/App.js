@@ -13,4 +13,20 @@ function App() {
   );
 }
 
+
+console.log("foo");
+
+
+// Implement dinamic styling...
+// Select all the buttons 
+//document.querySelector(".matrix");
+let buttons = document.querySelectorAll(".button");
+
+console.log("buttons=", buttons);
+
+
+
+
+
+
 export default App;
