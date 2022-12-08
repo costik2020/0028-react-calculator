@@ -19,6 +19,7 @@ body {
   margin: 0;
   background-color: gray;
   background-color: #5B4E77;
+  user-select: none;
 }
 
 .app {
@@ -41,7 +42,7 @@ body {
   grid-column: 1/5;
   grid-row: 1/2;
   background-color: #000000;
-  color: #ffffff;
+  color: rgb(252, 102, 5);
 }
 
 #bothDisplays #display {
@@ -52,6 +53,12 @@ body {
   font-size: 2rem;
   font-weight: bold;
   padding-top: 1rem;
+}
+
+/*Appling non effect to text*/
+#bothDisplays #display {
+  color: rgb(252, 102, 5);
+  text-shadow: 0 0 7px rgb(252, 102, 5), 0 0 10px rgb(252, 102, 5), 0 0 21px rgb(252, 102, 5), 0 0 42px rgb(252, 102, 5), 0 0 82px rgb(252, 102, 5), 0 0 92px rgb(252, 102, 5), 0 0 102px rgb(252, 102, 5), 0 0 151px rgb(252, 102, 5);
 }
 
 #clear {
@@ -103,6 +110,14 @@ body {
   font-size: 2rem;
   cursor: pointer;
   font-family: monospace;
+  color: #2F2B29;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #bbb, 0 2px 0 #999, 0 3px 0 #888, 0 4px 0 #777, 0 5px 0 #666, 0 6px 0 #555, 0 7px 0 #444, 0 8px 0 #333, 0 9px 7px #302314;
+}
+
+/*Fix the text shadow effect for the equal sign*/
+#equals {
+  text-shadow: 0 1px 1px #bbb, 0 2px 0 green, 0 3px 0 #888, 0 4px 0 #777, 0 5px 0 #666, 0 6px 0 #555, 0 7px 0 #898583, 0 8px 0 #898583, 0 9px 7px #302314 !important;
 }
 
 #one, #two, #three,
