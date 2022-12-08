@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/costik2020/0028-react-calculator",
   "name": "0023-calculator-in-react",
   "version": "0.1.0",
   "private": true,
@@ -36,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "sass": "^1.56.1"
   }
 }
