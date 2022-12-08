@@ -15,17 +15,32 @@
     font-weight: normal
     font-style: normal
 
+/*Palete*/
+
+$app-bg: #5B4E77 
+$display-bg: #000000
+$display-fg: #ffffff
+$number-buttons:#2E86AB 
+$operator-buttons: #F24236 
+$hover-buttons: #F5F749 
+$active-buttons: white
+$neon-color: $hover-buttons
+// #F6F5AE 
+
+
+
+
 
 
 
 body
   margin: 0
   background-color: gray
-  background-color: lightgreen
+  background-color: $app-bg
 
 .app 
   // border: 2px solid red
-  background-color: lightgreen
+  background-color: $app-bg
   display: flex
   justify-content: center
 
@@ -47,8 +62,8 @@ body
 #bothDisplays
   grid-column: 1 / 5
   grid-row: 1 / 2
-  background-color: black 
-  color: white
+  background-color: $display-bg
+  color: $display-fg
 
 #bothDisplays #display
   // border: 2px solid blue
@@ -67,35 +82,35 @@ body
 #clear
   grid-column: 1 / 2
   grid-row: 2 / 3
-  background-color: red
+  background-color: $operator-buttons
 
 
 
 #divide
   grid-column: 2 / 3
   grid-row: 2 / 3
-  background-color: red
+  background-color: $operator-buttons
 
 
 
 #multiply
   grid-column: 3 / 4
   grid-row: 2 / 3
-  background-color: red
+  background-color: $operator-buttons
 
 
 
 #subtract
   grid-column: 4 / 5
   grid-row: 2 / 3 
-  background-color: red
+  background-color: $operator-buttons
 
 
 
 #add
   grid-column: 4 / 5
   grid-row: 3 / 5 
-  background-color: red
+  background-color: $operator-buttons
 
 
 
@@ -104,7 +119,7 @@ body
 #equals
   grid-column: 4 / 5
   grid-row: 5 / 7 
-  background-color: red
+  background-color: $operator-buttons
 
 
 
@@ -130,7 +145,7 @@ body
 #four, #five, #six, 
 #seven, #eight, #nine,
 #zero, #decimal
-  background: blue
+  background: $number-buttons
 
 
 
@@ -139,11 +154,18 @@ body
 
 /*Click effects*/
 #bothDisplays ~ div:hover 
-  background: yellow
+  background: $hover-buttons
+  border-color:$neon-color
+  box-shadow: 0 0 7px $neon-color,   0 0 10px $neon-color, 0 0 21px $neon-color, 0 0 42px $neon-color, 0 0 82px $neon-color, 0 0 92px $neon-color, 0 0 102px $neon-color, 0 0 151px $neon-color
+
+
+
+
+
 
 
 #bothDisplays ~ div:active
-  background: white
+  background: $active-buttons
 
 
 #bothDisplays ~ div:active

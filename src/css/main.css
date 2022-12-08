@@ -14,14 +14,15 @@
   font-weight: normal;
   font-style: normal;
 }
+/*Palete*/
 body {
   margin: 0;
   background-color: gray;
-  background-color: lightgreen;
+  background-color: #5B4E77;
 }
 
 .app {
-  background-color: lightgreen;
+  background-color: #5B4E77;
   display: flex;
   justify-content: center;
 }
@@ -39,8 +40,8 @@ body {
 #bothDisplays {
   grid-column: 1/5;
   grid-row: 1/2;
-  background-color: black;
-  color: white;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 #bothDisplays #display {
@@ -56,37 +57,37 @@ body {
 #clear {
   grid-column: 1/2;
   grid-row: 2/3;
-  background-color: red;
+  background-color: #F24236;
 }
 
 #divide {
   grid-column: 2/3;
   grid-row: 2/3;
-  background-color: red;
+  background-color: #F24236;
 }
 
 #multiply {
   grid-column: 3/4;
   grid-row: 2/3;
-  background-color: red;
+  background-color: #F24236;
 }
 
 #subtract {
   grid-column: 4/5;
   grid-row: 2/3;
-  background-color: red;
+  background-color: #F24236;
 }
 
 #add {
   grid-column: 4/5;
   grid-row: 3/5;
-  background-color: red;
+  background-color: #F24236;
 }
 
 #equals {
   grid-column: 4/5;
   grid-row: 5/7;
-  background-color: red;
+  background-color: #F24236;
 }
 
 /*Style the number keys*/
@@ -108,12 +109,14 @@ body {
 #four, #five, #six,
 #seven, #eight, #nine,
 #zero, #decimal {
-  background: blue;
+  background: #2E86AB;
 }
 
 /*Click effects*/
 #bothDisplays ~ div:hover {
-  background: yellow;
+  background: #F5F749;
+  border-color: #F5F749;
+  box-shadow: 0 0 7px #F5F749, 0 0 10px #F5F749, 0 0 21px #F5F749, 0 0 42px #F5F749, 0 0 82px #F5F749, 0 0 92px #F5F749, 0 0 102px #F5F749, 0 0 151px #F5F749;
 }
 
 #bothDisplays ~ div:active {
