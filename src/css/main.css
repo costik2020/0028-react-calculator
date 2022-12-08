@@ -1,5 +1,4 @@
 * {
-  border: 1px solid black;
   box-sizing: border-box;
 }
 
@@ -17,26 +16,23 @@
 }
 body {
   margin: 0;
-  height: 90%;
   background-color: gray;
+  background-color: lightgreen;
 }
 
 .app {
-  border: 2px solid green;
   background-color: lightgreen;
-  height: 100vh;
   display: flex;
   justify-content: center;
 }
 
 .calculator {
-  width: 400px;
-  height: 600px;
+  width: 300px;
+  height: 450px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(50px, auto);
-  border: 2px solid yellow;
   margin: 8rem;
 }
 
@@ -48,12 +44,13 @@ body {
 }
 
 #bothDisplays #display {
-  border: 2px solid blue;
   text-align: right;
   padding: 5px;
   height: 5rem;
   font-family: codystarregular, bpdotsregular, regular;
   font-size: 2rem;
+  font-weight: bold;
+  padding-top: 1rem;
 }
 
 #clear {
@@ -101,10 +98,17 @@ body {
 /*More style for the keys*/
 #bothDisplays ~ div {
   text-align: center;
-  padding: 1.7rem 0;
+  padding: 1rem 0;
   font-size: 2rem;
   cursor: pointer;
   font-family: monospace;
+}
+
+#one, #two, #three,
+#four, #five, #six,
+#seven, #eight, #nine,
+#zero, #decimal {
+  background: blue;
 }
 
 /*Click effects*/
@@ -114,6 +118,17 @@ body {
 
 #bothDisplays ~ div:active {
   background: white;
+}
+
+#bothDisplays ~ div:active {
+  /*Responsivness*/
+  /*Laptop screen*/
+}
+
+@media all and (max-width: 1200px) {
+  .calculator {
+    margin-top: 2rem;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
