@@ -117,7 +117,7 @@ body {
 
 /*Fix the text shadow effect for the equal sign*/
 #equals {
-  text-shadow: 0 1px 1px #bbb, 0 2px 0 green, 0 3px 0 #888, 0 4px 0 #777, 0 5px 0 #666, 0 6px 0 #555, 0 7px 0 #898583, 0 8px 0 #898583, 0 9px 7px #302314 !important;
+  text-shadow: 0 1px 1px #bbb, 0 2px 0 #999, 0 3px 0 #888, 0 4px 0 #777, 0 5px 0 #666, 0 6px 0 #555, 0 7px 0 #9A9A9A, 0 8px 0 #898583, 0 9px 7px #302314 !important;
 }
 
 #one, #two, #three,
